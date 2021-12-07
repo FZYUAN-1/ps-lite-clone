@@ -18,7 +18,7 @@ namespace ps {
 class Resender;
 class PBMeta;
 /**
- * \brief Van sends messages to remote nodes
+ * \brief Van sends messages to remote nodes - 与其他节点的网络通信和Message的实际收发工作
  *
  * If environment variable PS_RESEND is set to be 1, then van will resend a
  * message if it no ACK messsage is received within PS_RESEND_TIMEOUT

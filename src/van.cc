@@ -202,7 +202,7 @@ void Van::ProcessBarrierCommand(Message* msg) {
         static_cast<int>(Postoffice::Get()->GetNodeIDs(group).size())) {
       barrier_count_[group] = 0;
       Message res;
-      res.meta.request = false;
+      res.meta.request = false; // // 回复时候，这里就是false
       res.meta.app_id = msg->meta.app_id;
       res.meta.customer_id = msg->meta.customer_id;
       res.meta.control.cmd = Control::BARRIER;
@@ -215,7 +215,7 @@ void Van::ProcessBarrierCommand(Message* msg) {
         }
       }
     }
-  } else {
+  } else {  // 说明这里收到了 barrier respones，可以解除 barrier了
     Postoffice::Get()->Manage(*msg);
   }
 }

@@ -14,7 +14,7 @@
 #include "ps/internal/van.h"
 namespace ps {
 /**
- * \brief the center of the system
+ * \brief the center of the system, 单例模式的全局管理类，其维护了系统的一个全局信息
  */
 class Postoffice {
  public:
@@ -168,23 +168,23 @@ class Postoffice {
   ~Postoffice() { delete van_; }
 
   void InitEnvironment();
-  Van* van_;
+  Van* van_; //底层通讯对象
   mutable std::mutex mu_;
   // app_id -> (customer_id -> customer pointer)
-  std::unordered_map<int, std::unordered_map<int, Customer*>> customers_;
-  std::unordered_map<int, std::vector<int>> node_ids_;
+  std::unordered_map<int, std::unordered_map<int, Customer*>> customers_; //本节点目前有哪些 customer
+  std::unordered_map<int, std::vector<int>> node_ids_;  //node id 映射表
   std::mutex server_key_ranges_mu_;
-  std::vector<Range> server_key_ranges_;
-  bool is_worker_, is_server_, is_scheduler_;
+  std::vector<Range> server_key_ranges_;  //Server key 区间范围对象
+  bool is_worker_, is_server_, is_scheduler_; //标注了本节点类型
   int num_servers_, num_workers_;
-  std::unordered_map<int, std::unordered_map<int, bool> > barrier_done_;
+  std::unordered_map<int, std::unordered_map<int, bool> > barrier_done_;  //Barrier 同步变量
   int verbose_;
   std::mutex barrier_mu_;
   std::condition_variable barrier_cond_;
   std::mutex heartbeat_mu_;
   std::mutex start_mu_;
   int init_stage_ = 0;
-  std::unordered_map<int, time_t> heartbeats_;
+  std::unordered_map<int, time_t> heartbeats_;  //节点心跳对象
   Callback exit_callback_;
   /** \brief Holding a shared_ptr to prevent it from being destructed too early */
   std::shared_ptr<Environment> env_ref_;

@@ -22,7 +22,9 @@ int main(int argc, char *argv[]) {
       int recver = kScheduler + kServerGroup + kWorkerGroup;
       ts.push_back(app.Request(1, "test", recver));
     }
-
+    // for(int i=0; i<ts.size(); ++i){
+    //   printf("%d\n", ts[i]);
+    // }
     for (int t : ts) {
       app.Wait(t);
     }

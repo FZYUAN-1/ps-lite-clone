@@ -12,3 +12,6 @@ target_link_libraries(kv_app_benchmark_test pslite)
 
 add_executable(kv_app_multi_workers_test test_kv_app_multi_workers.cc)
 target_link_libraries(kv_app_multi_workers_test pslite)
+
+add_executable(simple_test simple_test.cc)
+target_link_libraries(simple_test pslite)
